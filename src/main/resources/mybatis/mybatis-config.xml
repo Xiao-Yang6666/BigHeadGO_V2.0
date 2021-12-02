@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- sql 打印到控制台 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+        <!-- mybatis sql打印到log4j文件-->
+        <!-- <setting name="logImpl" value="LOG4J"/>-->
+        <!-- 开启驼峰转换 -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
+<!--    &lt;!&ndash; 别名 &ndash;&gt;-->
+<!--    <typeAliases>-->
+<!--        &lt;!&ndash; log实体类 &ndash;&gt;-->
+<!--        <typeAlias alias="perf" type="com.xiaoyang.pojo.LogPerf"/>-->
+<!--        <typeAlias alias="oper" type="com.xiaoyang.pojo.LogOper"/>-->
+<!--        <typeAlias alias="sysLog" type="com.xiaoyang.pojo.log.SysLog"/>-->
+<!--        &lt;!&ndash; pageMap 分页处理实体类&ndash;&gt;-->
+<!--        <typeAlias alias="pageMap" type="com.xiaoyang.pojo.PageMap"/>-->
+<!--        &lt;!&ndash; reqMap 简单封装实体类&ndash;&gt;-->
+<!--        <typeAlias alias="reqMap" type="com.xiaoyang.pojo.ReqMap"/>-->
+<!--    </typeAliases>-->
+
+<!--    &lt;!&ndash; mybatis插件 也就是拦截器&ndash;&gt;-->
+<!--    <plugins>-->
+<!--        &lt;!&ndash; 分页插件 &ndash;&gt;-->
+<!--        <plugin interceptor="com.xiaoyang.interceptor.MybatisPageInterceptor"/>-->
+<!--    </plugins>-->
+    
+</configuration>

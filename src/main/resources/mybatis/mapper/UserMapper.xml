@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+    <!-- 表名 -->
+    <sql id="tableName">test</sql>
+    <!-- 字段名 -->
+    <sql id="field">uid, uname, upwd, account, phone, regtime, logtime, version, del, type</sql>
+    <!-- 字段名和工人表联查 -->
+    <sql id="field2">u.uid uid, uname, upwd, account, phone, regtime, logtime, version, del, type, w.wid wid</sql>
+    <!-- 字段 -->
+    <sql id="fieldVal">
+        #{uid},
+        #{uname},
+        #{upwd},
+        #{account},
+        #{phone},
+        #{regtime},
+        #{logtime},
+        #{version},
+        #{del},
+        #{type}
+    </sql>
+    <!-- id字段名 -->
+    <sql id="tableIdName">uid</sql>
+    <!-- id字段 -->
+    <sql id="tableId">#{uid}</sql>
+
+    <select id="findAll" parameterType="map" resultType="map">
+        select
+        *
+        from
+        <include refid="tableName"/>
+    </select>
+
+</mapper>
