@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="userMapper">
     <!-- 表名 -->
-    <sql id="tableName">test</sql>
+    <sql id="tableName">user</sql>
     <!-- 字段名 -->
     <sql id="field">uid, uname, upwd, account, phone, regtime, logtime, version, del, type</sql>
     <!-- 字段名和工人表联查 -->
@@ -26,12 +26,63 @@
     <sql id="tableIdName">uid</sql>
     <!-- id字段 -->
     <sql id="tableId">#{uid}</sql>
+    <sql id="mapId">#{map.uid}</sql>
 
-    <select id="findAll" parameterType="map" resultType="map">
+    <select id="findAll" parameterType="reqParaMap" resultType="map">
         select
-        *
+        <include refid="field"/>
         from
         <include refid="tableName"/>
     </select>
 
+    <select id="count" parameterType="reqParaMap" resultType="int">
+        select count(*)
+        from
+        <include refid="tableName"/>
+    </select>
+
+    <select id="findOne" parameterType="reqParaMap" resultType="map">
+        select
+        <include refid="field2"/>
+        from
+        user u
+        left join worker w on u.uid = w.uid
+        <where>
+            <foreach collection="map" index="key" item="val" separator=" and ">
+                ${key} = #{val}
+            </foreach>
+        </where>
+    </select>
+
+    <update id="upd" parameterType="reqParaMap">
+        update
+        <include refid="tableName"/>
+        set
+        <foreach collection="map" index="key" item="val" separator=",">
+            ${key} = #{val}
+        </foreach>
+        where
+        <include refid="tableIdName"/>
+        =
+        <include refid="mapId"/>
+    </update>
+
+    <update id="loginTimeUpd" parameterType="reqParaMap">
+        update
+        <include refid="tableName"/>
+        set
+        <foreach collection="map" index="key" item="val" separator=",">
+            ${key} = #{val}
+        </foreach>
+        where
+        phone = #{map.phone}
+    </update>
+
+    <insert id="insert" parameterType="reqParaMap">
+        insert into
+        <include refid="tableName"/>
+        (<include refid="field"/>)
+        values
+        (<include refid="fieldVal"/>)
+    </insert>
 </mapper>

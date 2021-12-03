@@ -20,7 +20,6 @@ spring:
       cache-null-values:
 
 mybatis:
-  mapper-locations: classpath:mybatis/mapper/*.xml # 引入所有mapper
   config-location: classpath:mybatis/mybatis-config.xml # 引入mybatis核心配置文件
 
 # jedisUtil 工具类属性注入
@@ -44,6 +43,12 @@ map-util:
   # 默认起始地经纬度
   start_lng: 113.83812370688207
   start_lat: 34.72914742069733
+# 微信小程序 工具类属性注入
+wechat-util:
+  # 小程序appid
+  appId: wxc947fc0c1ec2e285
+  # 秘钥
+  appSecret: dc53875e6e31e7594b4ec7910d84e4cd
 
 
 
