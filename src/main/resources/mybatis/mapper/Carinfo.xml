@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="carinfo">
+    <!-- 表名 -->
+    <sql id="tableName">carinfo</sql>
+    <!-- 字段名 -->
+    <sql id="field">car_id, car_company_id, car_color, car_number, car_seat, car_state, del</sql>
+    <!-- 字段 -->
+    <sql id="fieldVal">
+        #{car_id},
+        #{car_company_id},
+        #{car_color},
+        #{car_number},
+        #{car_seat},
+        #{car_state},
+        #{del}
+    </sql>
+    <!-- id字段名 -->
+    <sql id="tableIdName">car_id</sql>
+    <!-- id字段 -->
+    <sql id="tableId">#{car_id}</sql>
+    <sql id="mapId">#{map.car_id}</sql>
+
+    <select id="findAll" parameterType="reqParaMap" resultType="map">
+        select
+        <include refid="field"/>
+        from
+        <include refid="tableName"/>
+        <where>
+            <foreach collection="map" index="key" item="val" separator=" and ">
+                ${key} = #{val}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="count" parameterType="reqParaMap" resultType="int">
+        select count(*)
+        from
+        <include refid="tableName"/>
+    </select>
+
+    <select id="findOne" parameterType="reqParaMap" resultType="map">
+        select
+        <include refid="field"/>
+        from
+        <include refid="tableName"/>
+        <where>
+            <foreach collection="map" index="key" item="val" separator=" and ">
+                ${key} = #{val}
+            </foreach>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="map">
+        insert into
+        <include refid="tableName"/>
+        (<include refid="field"/>)
+        values
+        (<include refid="fieldVal"/>)
+    </insert>
+
+    <update id="update" parameterType="reqParaMap">
+        update
+        <include refid="tableName"/>
+        set
+        <foreach collection="map" index="key" item="val" separator=",">
+            ${key} = #{val}
+        </foreach>
+        where
+        <include refid="tableIdName"/>
+        =
+        <include refid="mapId"/>
+    </update>
+
+</mapper>

@@ -3,15 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <settings>
-        <!-- 开启驼峰转换 -->
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
+    <!--    <settings>-->
+    <!--        &lt;!&ndash; 开启驼峰转换 &ndash;&gt;-->
+    <!--        <setting name="mapUnderscoreToCamelCase" value="true"/>-->
+    <!--    </settings>-->
 
     <!-- 别名 -->
     <typeAliases>
         <!-- log实体类 -->
-        <typeAlias alias="sysLog" type="com.xiaoyang.pojo.log.SysLog"/>
+        <!-- <typeAlias alias="sysLog" type="com.xiaoyang.pojo.log.SysLog"/>-->
         <!-- 入参 大map套小map形式 实体类-->
         <typeAlias alias="reqParaMap" type="com.bigheadgo.entity.ReqParaMap"/>
     </typeAliases>

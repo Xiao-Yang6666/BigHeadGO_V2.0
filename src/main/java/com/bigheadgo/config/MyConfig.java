@@ -22,11 +22,11 @@ public class MyConfig {
      * @return Executor
      */
     @Bean(name = "sysThreadPool")
-    public Executor sysExecutor() {
+    public Executor sysThreadPool() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //此方法返回可用处理器的虚拟机的最大数量; 不小于1
-        int core = Runtime.getRuntime().availableProcessors();
-        executor.setCorePoolSize(core);//设置核心线程数
+//        int core = Runtime.getRuntime().availableProcessors();
+        executor.setCorePoolSize(2);//设置核心线程数
         executor.setMaxPoolSize(4);//设置最大线程数
         executor.setKeepAliveSeconds(30);//除核心线程外的线程存活时间
         executor.setQueueCapacity(10);//如果传入值大于0，底层队列使用的是LinkedBlockingQueue,否则默认使用SynchronousQueue
@@ -41,7 +41,7 @@ public class MyConfig {
      * @return Executor
      */
     @Bean(name = "serviceThreadPool")
-    public Executor serviceExecutor() {
+    public Executor serviceThreadPool() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //此方法返回可用处理器的虚拟机的最大数量; 不小于1
         int core = Runtime.getRuntime().availableProcessors();

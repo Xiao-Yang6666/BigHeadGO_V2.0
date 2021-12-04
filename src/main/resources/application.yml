@@ -21,6 +21,7 @@ spring:
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml # 引入mybatis核心配置文件
+  mapper-locations: classpath:mybatis/mapper/*.xml # 加载全部mapper文件
 
 # jedisUtil 工具类属性注入
 jedis-util:
@@ -38,11 +39,6 @@ messages-util:
   loginTemplateId: 1207673
   # 忘记密码模板id
   forgetPwdTemplateId: 1207679
-# 地图 工具类属性注入
-map-util:
-  # 默认起始地经纬度
-  start_lng: 113.83812370688207
-  start_lat: 34.72914742069733
 # 微信小程序 工具类属性注入
 wechat-util:
   # 小程序appid

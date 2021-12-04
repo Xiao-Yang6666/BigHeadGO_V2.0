@@ -17,7 +17,7 @@ import java.util.Map;
 @Data
 public class ReqParaMap {
     // 别的参数
-    private Map<String, ?> map;
+    private Map<String, String> map;
     // 分页开始下标
     private Integer page;
     // 每页显示条数
@@ -28,7 +28,7 @@ public class ReqParaMap {
      *
      * @param map 页面接收的map
      */
-    public ReqParaMap(Map<String, ?> map) {
+    public ReqParaMap(Map<String, String> map) {
         // 处理分页参数
         if (map.containsKey("page") && map.containsKey("limit")) {
             // 获取值

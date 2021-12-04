@@ -2,37 +2,56 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="userMapper">
+<mapper namespace="driverinfo">
     <!-- 表名 -->
-    <sql id="tableName">user</sql>
+    <sql id="tableName">driverinfo</sql>
     <!-- 字段名 -->
-    <sql id="field">uid, uname, upwd, account, phone, regtime, logtime, version, del, type</sql>
-    <!-- 字段名和工人表联查 -->
-    <sql id="field2">u.uid uid, uname, upwd, account, phone, regtime, logtime, version, del, type, w.wid wid</sql>
+    <sql id="field">driver_id, driver_openid, driver_nickname, driver_avatarurl, driver_company_id, driver_name, driver_phone, driver_address, driver_state, driver_del</sql>
+    <!-- driver_address字段名 -->
+    <sql id="field2">driver_id, driver_address</sql>
+
     <!-- 字段 -->
     <sql id="fieldVal">
-        #{uid},
-        #{uname},
-        #{upwd},
-        #{account},
-        #{phone},
-        #{regtime},
-        #{logtime},
-        #{version},
-        #{del},
-        #{type}
+        #{driver_id},
+        #{driver_openid},
+        #{driver_nickname},
+        #{driver_avatarurl},
+        #{driver_company_id},
+        #{driver_avatarurl},
+        #{driver_name},
+        #{driver_phone},
+        #{driver_address},
+        #{driver_state},
+        #{driver_del}
     </sql>
     <!-- id字段名 -->
-    <sql id="tableIdName">uid</sql>
+    <sql id="tableIdName">driver_id</sql>
     <!-- id字段 -->
-    <sql id="tableId">#{uid}</sql>
-    <sql id="mapId">#{map.uid}</sql>
+    <sql id="tableId">#{driver_id}</sql>
+    <sql id="mapId">#{map.driver_id}</sql>
+
+    <select id="findAddress" parameterType="reqParaMap" resultType="map">
+        select
+        <include refid="field2"/>
+        from
+        <include refid="tableName"/>
+        <where>
+            <include refid="tableIdName"/>
+            =
+            <include refid="tableId"/>
+        </where>
+    </select>
 
     <select id="findAll" parameterType="reqParaMap" resultType="map">
         select
         <include refid="field"/>
         from
         <include refid="tableName"/>
+        <where>
+            <foreach collection="map" index="key" item="val" separator=" and ">
+                ${key} = #{val}
+            </foreach>
+        </where>
     </select>
 
     <select id="count" parameterType="reqParaMap" resultType="int">
@@ -43,10 +62,9 @@
 
     <select id="findOne" parameterType="reqParaMap" resultType="map">
         select
-        <include refid="field2"/>
+        <include refid="field"/>
         from
-        user u
-        left join worker w on u.uid = w.uid
+        <include refid="tableName"/>
         <where>
             <foreach collection="map" index="key" item="val" separator=" and ">
                 ${key} = #{val}
@@ -54,7 +72,7 @@
         </where>
     </select>
 
-    <update id="upd" parameterType="reqParaMap">
+    <update id="update" parameterType="reqParaMap">
         update
         <include refid="tableName"/>
         set
@@ -67,17 +85,6 @@
         <include refid="mapId"/>
     </update>
 
-    <update id="loginTimeUpd" parameterType="reqParaMap">
-        update
-        <include refid="tableName"/>
-        set
-        <foreach collection="map" index="key" item="val" separator=",">
-            ${key} = #{val}
-        </foreach>
-        where
-        phone = #{map.phone}
-    </update>
-
     <insert id="insert" parameterType="reqParaMap">
         insert into
         <include refid="tableName"/>
@@ -85,4 +92,5 @@
         values
         (<include refid="fieldVal"/>)
     </insert>
+
 </mapper>
