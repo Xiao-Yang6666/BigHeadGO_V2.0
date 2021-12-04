@@ -69,6 +69,7 @@ public class LoginServiceImp implements LoginService {
             Map<String, Object> driverinfo = (Map<String, Object>) dao.findForObject("driverinfo", "findOne", map);
             // 注册用户进数据库
             if (null == driverinfo) {
+                map.put("driver_state", "-1");
                 dao.insert("driverinfo", "insert", map);
                 driverinfo = (Map<String, Object>) dao.findForObject("driverinfo", "findOne", map);
             }

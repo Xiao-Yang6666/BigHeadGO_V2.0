@@ -50,7 +50,7 @@ public class DriverController extends BaseController {
     }
 
     @ApiOperation(value = "司机位置信息查询", notes = "查询司机当前位置信息,后期换redis")
-    @ApiImplicitParam(name = "driver_id", value = "司机id")
+    @ApiImplicitParam(name = "driver_id", value = "司机id", example = "1")
     @GetMapping("selectDriverAddress")
     @SysLogAnnotation(module = "司机模块", method = "司机位置信息查询")
     public RespJson selectDriverAddress(@RequestParam Integer driver_id) {
